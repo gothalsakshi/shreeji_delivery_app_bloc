@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/forgot_password/forgot_password_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/login/login_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/otp_verification/otp_verification_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/screens/splash/splash_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
-import 'package:shreeji_delivery_app_bloc/utils/route_page.dart';
-import 'package:shreeji_delivery_app_bloc/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,27 +16,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: ((context, child) => MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-          builder: (context, child) {
-            return const SplashScreen();
-          },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (ctx)=> LoginCubit()),
+        BlocProvider(create: (ctx)=> ForgotPasswordCubit()),
+        BlocProvider(create: (ctx)=> OtpVerificationCubit())
+      ], 
+      child: ScreenUtilInit(
+        builder: ((context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          
             title: 'Flutter Demo',
             // initialRoute: AppRoutes.splashScreen,
             // getPages: AppPages.getPages,
             // home: const SplashScreen(),
-            routerConfig: AppPages().router,
-            routeInformationParser: AppPages().router.routeInformationParser,
-            routerDelegate: AppPages().router.routerDelegate,
+            // routerConfig: AppPages().router,
+            // routeInformationParser: AppPages().router.routeInformationParser,
+            // routerDelegate: AppPages().router.routerDelegate,
             theme: ThemeData(
               primaryColor: primaryColor,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               // useMaterial3: true,
             ),
-            // home: const AssignedOrderScreen(),
+            home: const SplashScreen(),
           
-    )));
+    ))));
   }
 }
 

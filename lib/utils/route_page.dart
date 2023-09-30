@@ -16,78 +16,80 @@ import 'package:shreeji_delivery_app_bloc/utils/routes.dart';
 
 class AppPages {
   GoRouter router = GoRouter(
+    debugLogDiagnostics: true,
+    initialLocation: AppRoutes.splashScreen,
     routes: <RouteBase>[
       GoRoute(
-        name: AppRoutes.splashScreen,
+        // name: AppRoutes.splashScreen,
         path: AppRoutes.splashScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: SplashScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const SplashScreen();
         }),
       GoRoute(
-        name: AppRoutes.splashScreen,
+        // name: AppRoutes.splashScreen,
         path: AppRoutes.loginScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: LoginScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const LoginScreen();
         }),
       GoRoute(
-        name: AppRoutes.forgotPasswordScreen,
+        // name: AppRoutes.forgotPasswordScreen,
         path: AppRoutes.forgotPasswordScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: ForgotPasswordScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const ForgotPasswordScreen();
         }),
       GoRoute(
-        name: AppRoutes.otpVerificationScreen,
+        // name: AppRoutes.otpVerificationScreen,
         path: AppRoutes.otpVerificationScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: OtpVerificationScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const OtpVerificationScreen();
         }),
       GoRoute(
-        name: AppRoutes.resetPasswordScreen,
+        // name: AppRoutes.resetPasswordScreen,
         path: AppRoutes.resetPasswordScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: ResetPasswordScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const ResetPasswordScreen();
         }),
       GoRoute(
-        name: AppRoutes.assignedOrderScreen,
+        // name: AppRoutes.assignedOrderScreen,
         path: AppRoutes.assignedOrderScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: AssignedOrderScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const AssignedOrderScreen();
         }),
       GoRoute(
-        name: AppRoutes.completedOrderScreen,
+        // name: AppRoutes.completedOrderScreen,
         path: AppRoutes.completedOrderScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: CompletedOrderScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const CompletedOrderScreen();
         }),
       GoRoute(
-        name: AppRoutes.emptyOrderScreen,
+        // name: AppRoutes.emptyOrderScreen,
         path: AppRoutes.emptyOrderScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: EmptyOrderScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const EmptyOrderScreen();
         }),
       GoRoute(
-        name: AppRoutes.issueDetailsScreen,
+        // name: AppRoutes.issueDetailsScreen,
         path: AppRoutes.issueDetailsScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: IssueDetailsScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const IssueDetailsScreen();
         }),
       GoRoute(
-        name: AppRoutes.orderDetailsScreen,
+        // name: AppRoutes.orderDetailsScreen,
         path: AppRoutes.orderDetailsScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: OrderDetailsScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const OrderDetailsScreen();
         }),
       GoRoute(
-        name: AppRoutes.paymentScreen,
+        // name: AppRoutes.paymentScreen,
         path: AppRoutes.paymentScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: PaymentScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const PaymentScreen();
         }),
       GoRoute(
-        name: AppRoutes.profileScreen,
+        // name: AppRoutes.profileScreen,
         path: AppRoutes.profileScreen,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: ProfileScreen());
+        builder: (BuildContext context, GoRouterState state) {
+          return const ProfileScreen();
         }),
     ],
   );

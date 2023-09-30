@@ -1,8 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/forgot_password/forgot_password_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/otp_verification/otp_verification_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
@@ -13,6 +16,7 @@ class OtpVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final otpVerificationCubit = BlocProvider.of<OtpVerificationCubit>(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: secondaryColor,
@@ -21,9 +25,10 @@ class OtpVerificationScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: SizedBox(
-                height: getHeight(context)*0.8,
-                width: getWidth(context),
-                child: Image.asset('assets/images/background_image.png',fit: BoxFit.fill)),
+                  height: getHeight(context) * 0.8,
+                  width: getWidth(context),
+                  child: Image.asset('assets/images/background_image.png',
+                      fit: BoxFit.fill)),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -50,44 +55,51 @@ class OtpVerificationScreen extends StatelessWidget {
                                 color: blackColor)),
                       ),
                       Center(
-                        child: Text('Enter the OTP sent to your mobile number to verify',
+                        child: Text(
+                            'Enter the OTP sent to your mobile number to verify',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.hindMadurai(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xff5d5d5c))),
                       ),
-                      
                       Padding(
-                        padding: EdgeInsets.only(left: 15.w,right: 15.w,top: 25.h),
+                        padding:
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 25.h),
                         child: Center(
                           child: Pinput(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             focusedPinTheme: PinTheme(
-                              height: 50.h,width: 52.h,
-                      
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  top:  BorderSide(color: primaryColor),
-                                  left: BorderSide(color: primaryColor,),
-                                  right: BorderSide(color: primaryColor),
-                                  bottom: BorderSide(
-                                    color: primaryColor,
-                                    width: 4.h,
-                                      ),
+                                height: 50.h,
+                                width: 52.h,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(color: primaryColor),
+                                    left: BorderSide(
+                                      color: primaryColor,
                                     ),
-                              )
-                            ),
+                                    right: BorderSide(color: primaryColor),
+                                    bottom: BorderSide(
+                                      color: primaryColor,
+                                      width: 4.h,
+                                    ),
+                                  ),
+                                )),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 13.h, bottom: 35.h,right: 15.w),
-                        child: CustomText(
-                            text: '00: sec',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            color: textColor.withOpacity(0.3)),
+                        padding: EdgeInsets.only(
+                            top: 13.h, bottom: 35.h, right: 15.w),
+                        child: BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
+                          builder: (context, state) {
+                            return CustomText(
+                                text: '00: ${otpVerificationCubit.start}',
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                                color: textColor.withOpacity(0.3));
+                          },
+                        ),
                       ),
                       const InkWell(
                         // onTap: otpVerificationScreenController.goToResetPasswordScreen,
@@ -132,17 +144,19 @@ class OtpVerificationScreen extends StatelessWidget {
               ),
             ),
             Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.only(left: 24.w,top: 28.h),
-              child: SizedBox(
-                height: 30.h,width: 30.h,
-                child: FloatingActionButton(onPressed: goBack(context),
-                backgroundColor: whiteColor,
-                elevation: 0.1,
-                child: Icon(Icons.arrow_back_ios,size: 11.h,color: secondaryColor)),
-              )
-            )),
+                alignment: Alignment.topLeft,
+                child: Padding(
+                    padding: EdgeInsets.only(left: 24.w, top: 28.h),
+                    child: SizedBox(
+                      height: 30.h,
+                      width: 30.h,
+                      child: FloatingActionButton(
+                          onPressed: goBack(context),
+                          backgroundColor: whiteColor,
+                          elevation: 0.1,
+                          child: Icon(Icons.arrow_back_ios,
+                              size: 11.h, color: secondaryColor)),
+                    ))),
             Align(
               alignment: Alignment.topCenter,
               child: Container(
