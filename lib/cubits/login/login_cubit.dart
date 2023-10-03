@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shreeji_delivery_app_bloc/utils/routes.dart';
-// import 'package:shreeji_delivery_app_bloc/utils/validation_mixin.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/assigned_order_screen.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -17,7 +15,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   void goToAssignedOrderScreen(BuildContext context){
     if(formKey.currentState!.validate()){
-      context.pushReplacementNamed(AppRoutes.assignedOrderScreen);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()));
+      // context.pushReplacementNamed(AppRoutes.assignedOrderScreen);
       debugPrint('here is mobile number --->${phonenoController.text} and here is password ---->${passwordController.text}');
     } 
   }
@@ -31,5 +30,11 @@ class LoginCubit extends Cubit<LoginState> {
       debugPrint('here is password show--->$showPassword');
       emit(PasswordVisibilityOffState(hidePassword: showPassword));
     }
+  }
+
+  @override
+  Future<void> close() {
+    formKey.currentState!.dispose();
+    return super.close();
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/login/login_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/otp_verification/otp_verification_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/reset_password/reset_password_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/screens/splash/splash_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (ctx)=> LoginCubit()),
         BlocProvider(create: (ctx)=> ForgotPasswordCubit()),
-        BlocProvider(create: (ctx)=> OtpVerificationCubit())
+        BlocProvider(create: (ctx)=> OtpVerificationCubit()),
+        BlocProvider(create: (ctx)=> ResetPasswordCubit())
       ], 
       child: ScreenUtilInit(
         builder: ((context, child) => MaterialApp(

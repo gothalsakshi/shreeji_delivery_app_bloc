@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shreeji_delivery_app_bloc/screens/authentication/otp_verification_screen.dart';
 part 'forgot_password_state.dart';
 
@@ -13,5 +12,12 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     if(forgotPasswordFormKey.currentState!.validate()){
       Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const OtpVerificationScreen()));
     }
+  }
+
+  @override
+  Future<void> close() {
+    // ignore: invalid_use_of_protected_member
+    forgotPasswordFormKey.currentState!.dispose();
+    return super.close();
   }
 }

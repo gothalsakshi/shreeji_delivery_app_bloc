@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/order_details_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/common_drawer.dart';
@@ -196,9 +197,11 @@ class AssignedOrderScreen extends StatelessWidget {
         itemBuilder: (ctx,index){
         return Padding(
           padding: EdgeInsets.only(top: 10.h,left: 10.w,right: 10.w),
-          child: const InkWell(
-            // onTap: assignedOrderScreenController.goToOrderDetailsScreen,
-            child: OrderBox()),
+          child: InkWell(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const OrderDetailsScreen()));
+            },
+            child: const OrderBox()),
         );
       }),
     );

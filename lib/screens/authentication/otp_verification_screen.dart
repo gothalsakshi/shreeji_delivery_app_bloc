@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-import 'package:shreeji_delivery_app_bloc/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/otp_verification/otp_verification_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/screens/authentication/reset_password_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
@@ -74,11 +74,11 @@ class OtpVerificationScreen extends StatelessWidget {
                                 width: 52.h,
                                 decoration: BoxDecoration(
                                   border: Border(
-                                    top: BorderSide(color: primaryColor),
-                                    left: BorderSide(
+                                    top: const BorderSide(color: primaryColor),
+                                    left: const BorderSide(
                                       color: primaryColor,
                                     ),
-                                    right: BorderSide(color: primaryColor),
+                                    right: const BorderSide(color: primaryColor),
                                     bottom: BorderSide(
                                       color: primaryColor,
                                       width: 4.h,
@@ -91,19 +91,18 @@ class OtpVerificationScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                             top: 13.h, bottom: 35.h, right: 15.w),
-                        child: BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
-                          builder: (context, state) {
-                            return CustomText(
+                        child:  CustomText(
                                 text: '00: ${otpVerificationCubit.start}',
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
-                                color: textColor.withOpacity(0.3));
-                          },
-                        ),
+                                color: textColor.withOpacity(0.3))
+                          
                       ),
-                      const InkWell(
-                        // onTap: otpVerificationScreenController.goToResetPasswordScreen,
-                        child: CustomAuthButtonWidget(
+                      InkWell(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const ResetPasswordScreen()));
+                        },
+                        child: const CustomAuthButtonWidget(
                           buttonName: 'Proceed',
                         ),
                       ),

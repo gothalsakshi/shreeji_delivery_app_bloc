@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/assigned_order_screen.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/completed_order_screen.dart';
+import 'package:shreeji_delivery_app_bloc/screens/profile/profile_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/pop_up_widget.dart';
+import 'package:shreeji_delivery_app_bloc/utils/routes.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_text_widget.dart';
 
@@ -23,7 +27,9 @@ class CommonDrawer extends StatelessWidget {
               child: Row(mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                 InkWell(
-                  // onTap: goBack,
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  },
                   child: Icon(Icons.close,size: 20.h,))
               ],),
             ),
@@ -34,22 +40,24 @@ class CommonDrawer extends StatelessWidget {
               child: Image.asset('assets/images/frame.png',fit: BoxFit.fill)),
             InkWell(
               onTap: (){
-                // if(Get.currentRoute == AppRoutes.assignedOrderScreen){
-                //   goBack();
-                // }else{
-                //   Get.offNamed(AppRoutes.assignedOrderScreen);
-                // }
+                if(ModalRoute.of(context)!.settings.name == AppRoutes.assignedOrderScreen){
+                  goBack(context);
+                }else{
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()));
+                  // Get.offNamed(AppRoutes.assignedOrderScreen);
+                }
                 
               },
               child: drawerOption('Assigned Orders','assets/icons/assigned_order_icon.svg',false)),
             gradientDivider(context),
             InkWell(
               onTap: (){
-                // if(Get.currentRoute == AppRoutes.completedOrderScreen){
-                //   goBack();
-                // }else{
-                //   Get.offNamed(AppRoutes.completedOrderScreen);
-                // }
+                if(ModalRoute.of(context)!.settings.name == AppRoutes.completedOrderScreen){
+                  goBack(context);
+                }else{
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const CompletedOrderScreen()));
+                  // Get.offNamed(AppRoutes.completedOrderScreen);
+                }
                 
               },
               child: drawerOption('Completed Orders','assets/icons/completed_order_icon.svg',false)),
@@ -57,7 +65,7 @@ class CommonDrawer extends StatelessWidget {
             InkWell(
               onTap: (){
                 goBack(context);
-                // Get.toNamed(AppRoutes.profileScreen);
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const ProfileScreen()));
               },
               child: drawerOption('My Profile','assets/icons/profile_icon.svg',false)),
             gradientDivider(context),

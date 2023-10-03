@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/issue_details_screen.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/payment_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
@@ -19,7 +21,7 @@ class OrderDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            OrderBox(isOrderDetail: true),
+            const OrderBox(isOrderDetail: true),
             Container(
               margin: EdgeInsets.only(left: 15.w,right: 15.w,top: 15.h),
               decoration: BoxDecoration(
@@ -175,12 +177,16 @@ class OrderDetailsScreen extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 30.w,right: 30.w,top: 40.h,bottom: 20.h),
-              child: const CustomAuthButtonWidget(
-                // onTap: orderDetailsScreenController.goToPaymentScreen,
+              child: CustomAuthButtonWidget(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const PaymentScreen()));
+                },
                 buttonName: 'Mark as delivered'),
             ),
             InkWell(
-              // onTap: orderDetailsScreenController.goToIssueDetailsScreen,
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const IssueDetailsScreen()));
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 30.w,right: 30.w,bottom: 40.h),
                 height: 43.h,

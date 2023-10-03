@@ -16,8 +16,8 @@ getWidth(context) {
 }
 
 //used to get back from current scree
- goBack(context){
-  // Navigator.pop(context);
+ goBack(BuildContext context){
+  // Navigator.of(context).pop();
 }
 
 appbar(title,context){

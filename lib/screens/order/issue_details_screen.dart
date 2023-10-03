@@ -41,22 +41,22 @@ class IssueDetailsScreen extends StatelessWidget {
                       child: Divider(color: textColor.withOpacity(0.2),height: 1.h),
                     ),
                     // const CustomTextfield(hintText: 'Type your remarks here...',),
-                    DropdownButton(
-                      icon: SvgPicture.asset('assets/icons/down_arrow.svg'),
-                      isExpanded: true,
-                      hint: CustomText(text: 'Select the type of issue',fontSize: 13.sp,fontWeight: FontWeight.w600,color: textColor.withOpacity(0.5)),
-                      value: 1,
-                      items: ["test1", "test2", "test3", "test4", "test5", "test6", "test7"].map((country){
-                          return DropdownMenuItem( 
-                              child: Text(country),
-                              value: country,
-                          );
-                      }).toList(),
-                      onChanged: (country){
-                        // issueDetailScreenController.selectedDropValue.value = country.toString();
-                        print("You selected: $country");
-                      },
-                  )
+                  //   DropdownButton(
+                  //     icon: SvgPicture.asset('assets/icons/down_arrow.svg'),
+                  //     isExpanded: true,
+                  //     hint: CustomText(text: 'Select the type of issue',fontSize: 13.sp,fontWeight: FontWeight.w600,color: textColor.withOpacity(0.5)),
+                  //     value: 1,
+                  //     items: ["test1", "test2", "test3", "test4", "test5", "test6", "test7"].map((country){
+                  //         return DropdownMenuItem( 
+                  //             child: Text(country),
+                  //             value: country,
+                  //         );
+                  //     }).toList(),
+                  //     onChanged: (country){
+                  //       // issueDetailScreenController.selectedDropValue.value = country.toString();
+                  //       print("You selected: $country");
+                  //     },
+                  // )
                   ],
                 ),
               ),
