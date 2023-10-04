@@ -81,7 +81,7 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
                       children: [
                         CustomText(text: 'Upload',fontSize: 18.sp,fontWeight: FontWeight.w600,color: textColor),
                         InkWell(
-                          onTap: goBack(context),
+                          onTap: ()=> Navigator.of(context).pop(),
                           child: Padding(
                           padding: EdgeInsets.all(5.h),
                           child: Icon(Icons.close,size: 18.h,color: secondaryColor),
@@ -97,7 +97,10 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: pickImage,
+                        onTap: (){
+                          Navigator.of(context).pop();
+                          pickImage();
+                        },
                         child: Container(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +124,10 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
                         lineLength: 55.h,
                       ),
                       InkWell(
-                        onTap: takeImage,
+                        onTap: (){
+                          Navigator.of(context).pop();
+                          takeImage();
+                        },
                         child: Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,

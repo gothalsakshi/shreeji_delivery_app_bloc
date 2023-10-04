@@ -11,8 +11,6 @@ class OtpVerificationCubit extends Cubit<OtpVerificationState> {
   }
 
   int start = 60;
-  final _counterStreamController = StreamController<int>();
-  StreamSink<int> get counter_sink => _counterStreamController.sink;
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);

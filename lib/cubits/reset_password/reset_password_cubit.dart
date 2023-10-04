@@ -33,12 +33,4 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       emit(HideConfirmPassword(hideConfirmPassword: showConfirmPassword));
     }
   }
-
-  @override
-  Future<void> close() {
-    resetPassewordformKey.currentState!.dispose();
-    return super.close();
-  }
-  
-  
 }

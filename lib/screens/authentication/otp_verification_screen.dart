@@ -78,7 +78,8 @@ class OtpVerificationScreen extends StatelessWidget {
                                     left: const BorderSide(
                                       color: primaryColor,
                                     ),
-                                    right: const BorderSide(color: primaryColor),
+                                    right:
+                                        const BorderSide(color: primaryColor),
                                     bottom: BorderSide(
                                       color: primaryColor,
                                       width: 4.h,
@@ -89,18 +90,29 @@ class OtpVerificationScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                            top: 13.h, bottom: 35.h, right: 15.w),
-                        child:  CustomText(
-                                text: '00: ${otpVerificationCubit.start}',
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: textColor.withOpacity(0.3))
-                          
-                      ),
+                          padding: EdgeInsets.only(
+                              top: 13.h, bottom: 35.h, right: 15.w),
+                          child: BlocBuilder<OtpVerificationCubit, OtpVerificationState>(
+                            builder: (context, state) {
+                              if(state is CountDownStartState){
+                                return CustomText(
+                                  text: '00: ${state.countDownTimer} sec',
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor.withOpacity(0.3));
+                              }else{
+                                return CustomText(
+                                  text: '00: 60 sec',
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor.withOpacity(0.3));
+                              }
+                            },
+                          )),
                       InkWell(
-                        onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const ResetPasswordScreen()));
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => const ResetPasswordScreen()));
                         },
                         child: const CustomAuthButtonWidget(
                           buttonName: 'Proceed',
@@ -122,7 +134,7 @@ class OtpVerificationScreen extends StatelessWidget {
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      // otpVerificationScreenController.start.value = 60;
+                                    otpVerificationCubit.start  = 60;
                                     },
                                   text: "Resend",
                                   style: GoogleFonts.montserrat(

@@ -1,5 +1,6 @@
-import 'package:bloc/bloc.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shreeji_delivery_app_bloc/screens/order/assigned_order_screen.dart';
 part 'login_state.dart';
 
@@ -30,11 +31,5 @@ class LoginCubit extends Cubit<LoginState> {
       debugPrint('here is password show--->$showPassword');
       emit(PasswordVisibilityOffState(hidePassword: showPassword));
     }
-  }
-
-  @override
-  Future<void> close() {
-    formKey.currentState!.dispose();
-    return super.close();
   }
 }
