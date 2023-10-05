@@ -16,7 +16,7 @@ class ListAddItemState extends DeliveryDetailsState{
 }
 
 class RemoveListItemState extends DeliveryDetailsState{
-  final List imageList;
+  final List removeItemList;
 
-  RemoveListItemState({required this.imageList});
+  RemoveListItemState({required this.removeItemList});
 }

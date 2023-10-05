@@ -82,9 +82,11 @@ class PaymentScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                  if(deliveryDetailsCubit.selectedPayment == 1) {
+                                if (deliveryDetailsCubit.selectedPayment == 1) {
                                   // deliveryDetailsCubit.changePaymentMethod(0);
-                                  context.read<DeliveryDetailsCubit>().changePaymentMethod(0);
+                                  context
+                                      .read<DeliveryDetailsCubit>()
+                                      .changePaymentMethod(0);
                                 }
                               },
                               child: Row(
@@ -101,9 +103,12 @@ class PaymentScreen extends StatelessWidget {
                                       child: Radio(
                                         activeColor: primaryColor,
                                         value: 0,
-                                        groupValue: deliveryDetailsCubit.selectedPayment,
+                                        groupValue: deliveryDetailsCubit
+                                            .selectedPayment,
                                         onChanged: (value) {
-                                          context.read<DeliveryDetailsCubit>().changePaymentMethod(value!);
+                                          context
+                                              .read<DeliveryDetailsCubit>()
+                                              .changePaymentMethod(value!);
                                           // deliveryDetailsCubit.changePaymentMethod(value!);
                                         },
                                       ),
@@ -119,8 +124,10 @@ class PaymentScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                if(deliveryDetailsCubit.selectedPayment == 0) {
-                                  context.read<DeliveryDetailsCubit>().changePaymentMethod(1);
+                                if (deliveryDetailsCubit.selectedPayment == 0) {
+                                  context
+                                      .read<DeliveryDetailsCubit>()
+                                      .changePaymentMethod(1);
                                   // deliveryDetailsCubit.changePaymentMethod(1);
                                 }
                               },
@@ -137,9 +144,12 @@ class PaymentScreen extends StatelessWidget {
                                       child: Radio(
                                         activeColor: primaryColor,
                                         value: 1,
-                                        groupValue: deliveryDetailsCubit.selectedPayment,
+                                        groupValue: deliveryDetailsCubit
+                                            .selectedPayment,
                                         onChanged: (value) {
-                                          context.read<DeliveryDetailsCubit>().changePaymentMethod(1);
+                                          context
+                                              .read<DeliveryDetailsCubit>()
+                                              .changePaymentMethod(1);
                                           // deliveryDetailsCubit.changePaymentMethod(value!);
                                         },
                                       ),
@@ -208,18 +218,23 @@ class PaymentScreen extends StatelessWidget {
                               fontSize: 15.sp,
                               color: textColor,
                               fontWeight: FontWeight.w500),
-                          state is ListAddItemState ? 
-                          InkWell(
-                            onTap: () {
-                             showUploadImageDialog(context, deliveryDetailsCubit.pickImage, deliveryDetailsCubit.takeImage);
-                            },
-                            child: CircleAvatar(
-                              radius: 14.r,
-                              backgroundColor: secondaryColor.withOpacity(0.2),
-                              child: Icon(Icons.add,
-                                  color: secondaryColor, size: 18.h),
-                            ),
-                          ) : const SizedBox()
+                          deliveryDetailsCubit.list.isNotEmpty
+                              ? InkWell(
+                                  onTap: () {
+                                    showUploadImageDialog(
+                                        context,
+                                        deliveryDetailsCubit.pickImage,
+                                        deliveryDetailsCubit.takeImage);
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 14.r,
+                                    backgroundColor:
+                                        secondaryColor.withOpacity(0.2),
+                                    child: Icon(Icons.add,
+                                        color: secondaryColor, size: 18.h),
+                                  ),
+                                )
+                              : const SizedBox()
                         ],
                       ),
                       Padding(
@@ -227,21 +242,15 @@ class PaymentScreen extends StatelessWidget {
                         child: Divider(
                             color: textColor.withOpacity(0.2), height: 1.h),
                       ),
-                      
-                      InkWell(
-                        onTap: () {
-                          showUploadImageDialog(context, deliveryDetailsCubit.pickImage, deliveryDetailsCubit.takeImage);
-                        },
-                        child: 
-                            state is ListAddItemState ?
-                            Container(
+                      state is ListAddItemState && state.imageList.isNotEmpty || state is RemoveListItemState && state.removeItemList.isNotEmpty ?
+                      Container(
                     // color: Colors.amber,
                     height: 50.h,
                     // width: getWidth(context),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: state.imageList.length,
+                      itemCount: state is ListAddItemState? state.imageList.length : state is RemoveListItemState ? state.removeItemList.length : 0,
                       itemBuilder: (ctx,index){
                       return Stack(
                         fit: StackFit.loose,
@@ -255,7 +264,10 @@ class PaymentScreen extends StatelessWidget {
                           margin: EdgeInsets.only(right: 7.w),
                           padding: EdgeInsets.all(2.h),
                           width: 40.w,height: 50.h,
-                          child: Image.file(File(state.imageList[index]),fit: BoxFit.fill,),
+                          child: state is ListAddItemState?
+                          Image.file(File(state.imageList[index]),fit: BoxFit.fill) 
+                          : state is RemoveListItemState ? Image.file(File(state.removeItemList[index]),fit: BoxFit.fill)
+                          :  Container(height: 10,width: 10,color: Colors.amberAccent),
                         ),
                         Positioned(
                           right: 0.h,
@@ -278,22 +290,31 @@ class PaymentScreen extends StatelessWidget {
                         ],
                       );
                     }),
-                  ) : DottedBorder(
-                            color: secondaryColor,
-                            dashPattern: [7, 4],
-                            strokeWidth: 1.w,
-                            borderType: BorderType.RRect,
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                              width: getWidth(context),
-                              color: Color(0xfff4f3f6),
-                              child: SvgPicture.asset(
-                                'assets/icons/upload_icon.svg',
-                                height: 25.h,
-                                width: 25.h,
-                              ),
-                            ))
-                      )
+                  )
+                  : deliveryDetailsCubit.list.isEmpty ?
+                      InkWell(
+                          onTap: () {
+                            showUploadImageDialog(
+                                context,
+                                deliveryDetailsCubit.pickImage,
+                                deliveryDetailsCubit.takeImage);
+                          },
+                          child: DottedBorder(
+                              color: secondaryColor,
+                              dashPattern: [7, 4],
+                              strokeWidth: 1.w,
+                              borderType: BorderType.RRect,
+                              child: Container(
+                                padding:
+                                    EdgeInsets.only(top: 10.h, bottom: 10.h),
+                                width: getWidth(context),
+                                color: Color(0xfff4f3f6),
+                                child: SvgPicture.asset(
+                                  'assets/icons/upload_icon.svg',
+                                  height: 25.h,
+                                  width: 25.h,
+                                ),
+                              ))) : const SizedBox()
                     ],
                   ),
                 ),
@@ -334,10 +355,15 @@ class PaymentScreen extends StatelessWidget {
                       left: 30.w, right: 30.w, top: 35.h, bottom: 40.h),
                   child: CustomAuthButtonWidget(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const EmptyOrderScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => const EmptyOrderScreen()));
                         // Navigator.of(co
                         // ntext).pop();
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const CustomText(text: 'Payment done successfully',color: whiteColor),backgroundColor: secondaryColor.withOpacity(0.8)));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const CustomText(
+                                text: 'Payment done successfully',
+                                color: whiteColor),
+                            backgroundColor: secondaryColor.withOpacity(0.8)));
                         // Get.showSnackbar(GetSnackBar(message: 'Payment done successfully',isDismissible: true,));
                       },
                       buttonName: 'Submit'),

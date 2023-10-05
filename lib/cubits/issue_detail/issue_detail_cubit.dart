@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-part 'delivery_details_state.dart';
+part 'issue_detail_state.dart';
 
+class IssueDetailCubit extends Cubit<IssueDetailState> {
+  IssueDetailCubit() : super(ListInitialState(imageList: []));
 
-class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
-  DeliveryDetailsCubit() : super(ListInitialState(imageList: []));
   int selectedPayment = 0;
   XFile? image;
   List list = [];
+  String selectedDropValue = '';
 
   Future pickImage() async {
     // list.clear();
@@ -41,10 +42,11 @@ class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
 
   void removeItemsFrOmList(int index){
     list.removeAt(index);
-    emit(RemoveListItemState(removeItemList: list));  
+    emit(RemoveListItemState(removeImageList: list));
   }
 
-  void changePaymentMethod(int val){
-    selectedPayment = val;
+  void selecteCoutry(value){
+    selectedDropValue = value;
+    emit(SelecteCountryState(country: value));
   }
 }
