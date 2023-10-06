@@ -32,7 +32,7 @@ appbar(title,context){
   child: Stack(
       children: [
         GestureDetector(
-          onTap: goBack(context),
+          onTap: ()=> Navigator.of(context).pop(),
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
@@ -101,7 +101,7 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
                           Navigator.of(context).pop();
                           pickImage();
                         },
-                        child: Container(
+                        child: SizedBox(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,7 +128,7 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
                           Navigator.of(context).pop();
                           takeImage();
                         },
-                        child: Container(
+                        child: SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,

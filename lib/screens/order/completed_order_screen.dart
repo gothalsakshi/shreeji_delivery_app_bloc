@@ -144,7 +144,7 @@ class CompletedOrderScreen extends StatelessWidget {
                                                 title: const CustomTextfield(isReadyOnly: true,)))),
                                             Padding(
                                               padding: EdgeInsets.only(left: 12.w,right: 12.w),
-                                              child: CustomText(text: 'To'),
+                                              child: const CustomText(text: 'To'),
                                             ),
                                             Expanded(child: SizedBox(
                                               height: 30.h,
@@ -155,7 +155,7 @@ class CompletedOrderScreen extends StatelessWidget {
                                                 enabled: true,
                                                 contentPadding: EdgeInsets.zero,
                                                 leading: Icon(Icons.calendar_month,color: secondaryColor,size: 18.h),
-                                                title: CustomTextfield(isReadyOnly: true,))),
+                                                title: const CustomTextfield(isReadyOnly: true,))),
                                             )
                                           ],
                                         ),

@@ -20,7 +20,7 @@ class CustomAuthButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8), color: primaryColor,
             boxShadow: [
               BoxShadow(
-                color: Color(0xffebeae6),
+                color: const Color(0xffebeae6),
                 spreadRadius: 5.r,
                 blurRadius: 7.r
               )

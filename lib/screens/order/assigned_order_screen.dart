@@ -92,7 +92,7 @@ class AssignedOrderScreen extends StatelessWidget {
                                                         index == 3 ?
                                                         Padding(
                                                           padding: EdgeInsets.only(left: 10.w,right: 8.w),
-                                                          child: Icon(Icons.calendar_month),
+                                                          child: const Icon(Icons.calendar_month),
                                                         ) : 
                                                         Transform.scale(
                                                           scale: 0.9.h,

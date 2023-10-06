@@ -6,7 +6,9 @@ part 'delivery_details_state.dart';
 
 
 class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
-  DeliveryDetailsCubit() : super(ListInitialState(imageList: []));
+  DeliveryDetailsCubit() : super(ListInitialState(imageList: const [])){
+    changePaymentMethod(0);
+  }
   int selectedPayment = 0;
   XFile? image;
   List list = [];
@@ -21,7 +23,7 @@ class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
       list.add(image.path);
       emit(ListAddItemState(imageList: list));
     } on PlatformException catch(e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
   }
 
@@ -35,7 +37,7 @@ class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
       list.add(image.path);
       emit(ListAddItemState(imageList: list));
     } on PlatformException catch(e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
   }
 
@@ -46,5 +48,6 @@ class DeliveryDetailsCubit extends Cubit<DeliveryDetailsState> {
 
   void changePaymentMethod(int val){
     selectedPayment = val;
+    emit(SelectPaymentModeState(selectedPaymentMode: selectedPayment));
   }
 }

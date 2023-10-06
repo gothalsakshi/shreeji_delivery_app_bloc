@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shreeji_delivery_app_bloc/screens/order/assigned_order_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_text_widget.dart';
 
-class EmptyOrderScreen extends StatelessWidget {
-  const EmptyOrderScreen({super.key});
+class EmptyIssueScreen extends StatelessWidget {
+  const EmptyIssueScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +19,15 @@ class EmptyOrderScreen extends StatelessWidget {
         'Back to Orders',
         onTap: (){
           // Route().settings.name;
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()), (route) => false);
+          // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()), (route) => false);
           // if(Get.previousRoute == AppRoutes.issueDetailsScreen){
           //   goBack();
           //   goBack();
           // }else{
           //   Get.offAllNamed(AppRoutes.assignedOrderScreen);
           // }
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
           
         },),
       ),
@@ -43,8 +44,8 @@ class EmptyOrderScreen extends StatelessWidget {
               SvgPicture.asset('assets/images/issue_logged.svg')),
             SizedBox(height: 20.h,),
             // Get.previousRoute == AppRoutes.issueDetailsScreen ? 
-            // CustomText(text: 'Issue logged successfully',fontSize: 20.sp,color: secondaryColor,) :
-            CustomText(text: 'Order Delivered Successfully',fontSize: 20.sp,color: secondaryColor,)
+            CustomText(text: 'Issue logged successfully',fontSize: 20.sp,color: secondaryColor) 
+            // CustomText(text: 'Order Delivered Successfully',fontSize: 20.sp,color: secondaryColor,)
           ],
         ),
       ),

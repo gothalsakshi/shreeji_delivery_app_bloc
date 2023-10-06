@@ -29,6 +29,7 @@ class CommonDrawer extends StatelessWidget {
                 InkWell(
                   onTap: (){
                     Navigator.of(context).pop();
+                    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()), (route) => false);
                   },
                   child: Icon(Icons.close,size: 20.h,))
               ],),
@@ -111,7 +112,7 @@ class CommonDrawer extends StatelessWidget {
           ),
           SizedBox(
             height: 16.h,width: 16.h,
-            child: SvgPicture.asset('assets/icons/arrow_icon.svg',colorFilter: isLogout == true ? ColorFilter.mode(Color(0xff8d2626), BlendMode.srcIn): null))
+            child: SvgPicture.asset('assets/icons/arrow_icon.svg',colorFilter: isLogout == true ? const ColorFilter.mode(Color(0xff8d2626), BlendMode.srcIn): null))
         ],
       ),
     );
@@ -127,8 +128,8 @@ class CommonDrawer extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-          Color(0xffeba500).withOpacity(0.3),
-          Color(0xffeba500).withOpacity(0.1),whiteColor
+          const Color(0xffeba500).withOpacity(0.3),
+          const Color(0xffeba500).withOpacity(0.1),whiteColor
         ])
       ),
     );

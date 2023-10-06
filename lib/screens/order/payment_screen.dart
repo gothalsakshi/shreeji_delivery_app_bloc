@@ -77,12 +77,13 @@ class PaymentScreen extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),
+                      state is SelectPaymentModeState ?
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             InkWell(
                               onTap: () {
-                                if (deliveryDetailsCubit.selectedPayment == 1) {
+                                if (state.selectedPaymentMode == 1) {
                                   // deliveryDetailsCubit.changePaymentMethod(0);
                                   context
                                       .read<DeliveryDetailsCubit>()
@@ -103,8 +104,7 @@ class PaymentScreen extends StatelessWidget {
                                       child: Radio(
                                         activeColor: primaryColor,
                                         value: 0,
-                                        groupValue: deliveryDetailsCubit
-                                            .selectedPayment,
+                                        groupValue: state.selectedPaymentMode,
                                         onChanged: (value) {
                                           context
                                               .read<DeliveryDetailsCubit>()
@@ -124,7 +124,7 @@ class PaymentScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                if (deliveryDetailsCubit.selectedPayment == 0) {
+                                if (state.selectedPaymentMode == 0) {
                                   context
                                       .read<DeliveryDetailsCubit>()
                                       .changePaymentMethod(1);
@@ -144,8 +144,7 @@ class PaymentScreen extends StatelessWidget {
                                       child: Radio(
                                         activeColor: primaryColor,
                                         value: 1,
-                                        groupValue: deliveryDetailsCubit
-                                            .selectedPayment,
+                                        groupValue: state.selectedPaymentMode,
                                         onChanged: (value) {
                                           context
                                               .read<DeliveryDetailsCubit>()
@@ -163,7 +162,7 @@ class PaymentScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ]),
+                          ]) : const Center(child: CircularProgressIndicator()),
                     ],
                   ),
                 ),
@@ -243,7 +242,7 @@ class PaymentScreen extends StatelessWidget {
                             color: textColor.withOpacity(0.2), height: 1.h),
                       ),
                       state is ListAddItemState && state.imageList.isNotEmpty || state is RemoveListItemState && state.removeItemList.isNotEmpty ?
-                      Container(
+                      SizedBox(
                     // color: Colors.amber,
                     height: 50.h,
                     // width: getWidth(context),
@@ -281,7 +280,7 @@ class PaymentScreen extends StatelessWidget {
                               backgroundColor: whiteColor,
                               child: CircleAvatar(
                                 radius: 8.r,
-                                backgroundColor: Color(0xff8d2626),
+                                backgroundColor: const Color(0xff8d2626),
                                 child: Center(child: Icon(Icons.close,size: 14.h,color: whiteColor)),
                               ),
                             ),
@@ -301,14 +300,14 @@ class PaymentScreen extends StatelessWidget {
                           },
                           child: DottedBorder(
                               color: secondaryColor,
-                              dashPattern: [7, 4],
+                              dashPattern: const [7, 4],
                               strokeWidth: 1.w,
                               borderType: BorderType.RRect,
                               child: Container(
                                 padding:
                                     EdgeInsets.only(top: 10.h, bottom: 10.h),
                                 width: getWidth(context),
-                                color: Color(0xfff4f3f6),
+                                color: const Color(0xfff4f3f6),
                                 child: SvgPicture.asset(
                                   'assets/icons/upload_icon.svg',
                                   height: 25.h,

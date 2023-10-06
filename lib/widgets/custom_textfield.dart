@@ -92,8 +92,8 @@ class CustomTextfield extends StatelessWidget {
               decoration: InputDecoration(
                 suffixIcon: suffixIcon,
                   prefixIcon: prefixIcon,
-                  prefixIconConstraints: BoxConstraints(),
-                  suffixIconConstraints: BoxConstraints(),
+                  prefixIconConstraints: const BoxConstraints(),
+                  suffixIconConstraints: const BoxConstraints(),
                   hintText: hintText,
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: textColor.withOpacity(0.2))),

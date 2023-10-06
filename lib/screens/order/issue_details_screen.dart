@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/issue_detail/issue_detail_cubit.dart';
-import 'package:shreeji_delivery_app_bloc/screens/order/empty_order_screen.dart';
+import 'package:shreeji_delivery_app_bloc/screens/order/empty_issue_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
@@ -58,14 +58,14 @@ class IssueDetailsScreen extends StatelessWidget {
                           value: issueDetailCubit.selectedDropValue == '' ? null : issueDetailCubit.selectedDropValue,
                           items: ["test1", "test2", "test3", "test4", "test5", "test6", "test7"].map((country){
                               return DropdownMenuItem(
-                                  child: Text(country),
                                   value: country,
+                                  child: Text(country),
                               );
                           }).toList(),
                           onChanged: (country){
                             // issueDetailScreenController.selectedDropValue.value = country.toString();
                             context.read<IssueDetailCubit>().selecteCoutry(country);
-                            print("You selected: $country");
+                            debugPrint("You selected: $country");
                           },
                       ) 
                     ],
@@ -147,7 +147,7 @@ class IssueDetailsScreen extends StatelessWidget {
                       ),
                      
                       state is ListAddItemState && state.imageList.isNotEmpty || state is RemoveListItemState && state.removeImageList.isNotEmpty ?
-                      Container(
+                      SizedBox(
                         // color: Colors.amber,
                         height: 50.h,
                         // width: getWidth(context),
@@ -186,7 +186,7 @@ class IssueDetailsScreen extends StatelessWidget {
                                         backgroundColor: whiteColor,
                                         child: CircleAvatar(
                                           radius: 8.r,
-                                          backgroundColor: Color(0xff8d2626),
+                                          backgroundColor: const Color(0xff8d2626),
                                           child: Center(
                                               child: Icon(Icons.close,
                                                   size: 14.h,
@@ -204,13 +204,13 @@ class IssueDetailsScreen extends StatelessWidget {
                         onTap: ()=> showUploadImageDialog(context,context.read<IssueDetailCubit>().pickImage,context.read<IssueDetailCubit>().takeImage),
                         child: DottedBorder(
                           color: secondaryColor,
-                          dashPattern: [7, 4],
+                          dashPattern: const [7, 4],
                           strokeWidth: 1.w,
                           borderType: BorderType.RRect,
                           child: Container(
                             padding: EdgeInsets.only(top: 10.h,bottom: 10.h),
                             width: getWidth(context),
-                            color: Color(0xfff4f3f6),
+                            color:const Color(0xfff4f3f6),
                             child: SvgPicture.asset('assets/icons/upload_icon.svg',height: 25.h,width: 25.h,),
                           )),
                       ) : const SizedBox()
@@ -223,7 +223,7 @@ class IssueDetailsScreen extends StatelessWidget {
                   child: CustomAuthButtonWidget(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const EmptyOrderScreen()));
+                            builder: (ctx) => const EmptyIssueScreen()));
                         // Navigator.of(co
                         // ntext).pop();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

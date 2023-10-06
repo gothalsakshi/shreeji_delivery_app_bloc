@@ -20,3 +20,10 @@ class RemoveListItemState extends DeliveryDetailsState{
 
   RemoveListItemState({required this.removeItemList});
 }
+
+class SelectPaymentModeState extends DeliveryDetailsState{
+  final int selectedPaymentMode;
+
+  SelectPaymentModeState({required this.selectedPaymentMode});
+  
+}

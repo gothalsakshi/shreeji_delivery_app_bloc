@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shreeji_delivery_app_bloc/screens/authentication/login_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
 import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
@@ -50,12 +51,13 @@ Future<void> showAlertDialog(BuildContext context){
                   Padding(
                     padding: EdgeInsets.only(left: 20.w,right: 20.w,bottom: 14.h,top: 18.h),
                     child: CustomAuthButtonWidget(onTap: (){
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const LoginScreen()), (route) => false);
                       // Get.offAllNamed(AppRoutes.loginScreen);
                     },
                       buttonName: 'Logout'),
                   ),
                   InkWell(
-                    onTap: goBack(context),
+                    onTap: ()=> Navigator.of(context).pop(),
                     child: Container(
                       margin: EdgeInsets.only(left: 20.w,right: 20.w),
                       height: 43.h,

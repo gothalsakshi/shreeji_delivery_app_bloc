@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 part 'issue_detail_state.dart';
 
 class IssueDetailCubit extends Cubit<IssueDetailState> {
-  IssueDetailCubit() : super(ListInitialState(imageList: []));
+  IssueDetailCubit() : super(ListInitialState(imageList: const []));
 
   int selectedPayment = 0;
   XFile? image;
@@ -22,7 +22,7 @@ class IssueDetailCubit extends Cubit<IssueDetailState> {
       list.add(image.path);
       emit(ListAddItemState(imageList: list));
     } on PlatformException catch(e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
   }
 
@@ -36,7 +36,7 @@ class IssueDetailCubit extends Cubit<IssueDetailState> {
       list.add(image.path);
       emit(ListAddItemState(imageList: list));
     } on PlatformException catch(e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
   }
 
