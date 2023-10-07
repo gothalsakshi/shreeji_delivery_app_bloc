@@ -354,8 +354,7 @@ class PaymentScreen extends StatelessWidget {
                       left: 30.w, right: 30.w, top: 35.h, bottom: 40.h),
                   child: CustomAuthButtonWidget(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const EmptyOrderScreen()));
+                        Navigator.of(context).push(customPageRouteBuilder(const EmptyOrderScreen()));
                         // Navigator.of(co
                         // ntext).pop();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -151,3 +151,22 @@ void showUploadImageDialog(context,VoidCallback pickImage, VoidCallback takeImag
       );
     });
 }
+
+ PageRouteBuilder<dynamic> customPageRouteBuilder(Widget screen){
+  return PageRouteBuilder(
+                      transitionDuration: const Duration(milliseconds: 500),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                           screen,
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return SlideTransition(
+                          position: Tween(
+                                  begin: const Offset(1.0, 0.0),
+                                  end: const Offset(0.0, 0.0))
+                              .animate(animation),
+                          // opacity: animation,
+                          child: child,
+                        );
+                      },
+                    );
+}

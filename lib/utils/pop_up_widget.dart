@@ -51,7 +51,7 @@ Future<void> showAlertDialog(BuildContext context){
                   Padding(
                     padding: EdgeInsets.only(left: 20.w,right: 20.w,bottom: 14.h,top: 18.h),
                     child: CustomAuthButtonWidget(onTap: (){
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const LoginScreen()), (route) => false);
+                      Navigator.of(context).pushAndRemoveUntil(customPageRouteBuilder(const LoginScreen()), (route) => false);
                       // Get.offAllNamed(AppRoutes.loginScreen);
                     },
                       buttonName: 'Logout'),

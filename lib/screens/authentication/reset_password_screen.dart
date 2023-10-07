@@ -44,7 +44,7 @@ class ResetPasswordScreen extends StatelessWidget with ValidationsMixin {
                   child: BlocBuilder<ResetPasswordCubit, ResetPasswordState>(
                     builder: (context, state) {
                       return Form(
-                        key: resetPasswordCubit.resetPassewordformKey,
+                        key: resetPasswordCubit.resetPasswordFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [

@@ -102,9 +102,7 @@ class LoginScreen extends StatelessWidget with ValidationsMixin {
                               child: InkWell(
                                   onTap: () {
                                     Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (ctx) =>
-                                                const ForgotPasswordScreen()));
+                                        customPageRouteBuilder(const ForgotPasswordScreen()));
                                   },
                                   child: CustomText(
                                       text: 'Forgot Password?',

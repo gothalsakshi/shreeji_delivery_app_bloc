@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shreeji_delivery_app_bloc/screens/order/assigned_order_screen.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
+import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_text_widget.dart';
 
@@ -20,7 +21,7 @@ class EmptyOrderScreen extends StatelessWidget {
         'Back to Orders',
         onTap: (){
           // Route().settings.name;
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()), (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(customPageRouteBuilder(const AssignedOrderScreen()), (route) => false);
           // if(Get.previousRoute == AppRoutes.issueDetailsScreen){
           //   goBack();
           //   goBack();

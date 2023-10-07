@@ -111,8 +111,7 @@ class OtpVerificationScreen extends StatelessWidget {
                           )),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (ctx) => const ResetPasswordScreen()));
+                          Navigator.of(context).push(customPageRouteBuilder(const ResetPasswordScreen()));
                         },
                         child: const CustomAuthButtonWidget(
                           buttonName: 'Proceed',

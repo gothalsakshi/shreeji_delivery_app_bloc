@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shreeji_delivery_app_bloc/screens/authentication/login_screen.dart';
+import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
       Future.delayed(const Duration(seconds: 3),() {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const LoginScreen()));
+        Navigator.of(context).pushReplacement(customPageRouteBuilder(const LoginScreen()));
         // context.pushReplacement(AppRoutes.loginScreen);
       },
     );

@@ -222,8 +222,7 @@ class IssueDetailsScreen extends StatelessWidget {
                       left: 30.w, right: 30.w, top: 40.h, bottom: 20.h),
                   child: CustomAuthButtonWidget(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const EmptyIssueScreen()));
+                        Navigator.of(context).push(customPageRouteBuilder(const EmptyIssueScreen()));
                         // Navigator.of(co
                         // ntext).pop();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

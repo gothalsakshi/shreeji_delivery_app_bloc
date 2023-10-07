@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shreeji_delivery_app_bloc/screens/authentication/otp_verification_screen.dart';
+import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 part 'forgot_password_state.dart';
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
@@ -10,7 +11,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
 
   void goToOtpVerificationScreen(BuildContext context){
     if(forgotPasswordFormKey.currentState!.validate()){
-      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const OtpVerificationScreen()));
+      Navigator.of(context).push(customPageRouteBuilder(const OtpVerificationScreen()));
     }
   }
 

@@ -44,7 +44,7 @@ class CommonDrawer extends StatelessWidget {
                 if(ModalRoute.of(context)!.settings.name == AppRoutes.assignedOrderScreen){
                   Navigator.of(context).pop();
                 }else{
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const AssignedOrderScreen()));
+                  Navigator.of(context).pushReplacement(customPageRouteBuilder(const AssignedOrderScreen()));
                   // Get.offNamed(AppRoutes.assignedOrderScreen);
                 }
                 
@@ -56,7 +56,7 @@ class CommonDrawer extends StatelessWidget {
                 if(ModalRoute.of(context)!.settings.name == AppRoutes.completedOrderScreen){
                   Navigator.of(context).pop();
                 }else{
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const CompletedOrderScreen()));
+                  Navigator.of(context).pushReplacement(customPageRouteBuilder(const CompletedOrderScreen()));
                   // Get.offNamed(AppRoutes.completedOrderScreen);
                 }
                 
@@ -66,7 +66,7 @@ class CommonDrawer extends StatelessWidget {
             InkWell(
               onTap: (){
                 Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const ProfileScreen()));
+                Navigator.of(context).push(customPageRouteBuilder(const ProfileScreen()));
               },
               child: drawerOption('My Profile','assets/icons/profile_icon.svg',false)),
             gradientDivider(context),

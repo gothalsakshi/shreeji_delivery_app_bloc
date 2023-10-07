@@ -179,13 +179,13 @@ class OrderDetailsScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: 30.w,right: 30.w,top: 40.h,bottom: 20.h),
               child: CustomAuthButtonWidget(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const PaymentScreen()));
+                  Navigator.of(context).push(customPageRouteBuilder(const PaymentScreen()));
                 },
                 buttonName: 'Mark as delivered'),
             ),
             InkWell(
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> const IssueDetailsScreen()));
+                Navigator.of(context).push(customPageRouteBuilder(const IssueDetailsScreen()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: 30.w,right: 30.w,bottom: 40.h),
