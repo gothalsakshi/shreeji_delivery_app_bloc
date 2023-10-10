@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/completed_order/completed_order_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/theme/colors.dart';
-import 'package:shreeji_delivery_app_bloc/utils/utility.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/common_drawer.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_button_widget.dart';
 import 'package:shreeji_delivery_app_bloc/widgets/custom_text_widget.dart';
@@ -14,6 +15,7 @@ class CompletedOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final completedOrderScreenCubit = BlocProvider.of<CompletedOrderCubit>(context);
     return  Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,151 +32,294 @@ class CompletedOrderScreen extends StatelessWidget {
       floatingActionButton: InkWell(
         onTap: (){
           showGeneralDialog(
-            barrierLabel: "Label",
-            barrierDismissible: true,
-            barrierColor: Colors.black.withOpacity(0.5),
-            transitionDuration: const Duration(milliseconds: 100),
-            context: context,
-            pageBuilder: (context, anim1, anim2) {
-              return Material(
-                type: MaterialType.transparency,
-                child: StatefulBuilder(
-                  builder: (con, setState) {
-                    return Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        height: 250.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: BorderRadius.only(
-                                topRight:Radius.circular(20),
-                                topLeft:Radius.circular(20))),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment:CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 18.w,right: 18.w,top: 20.h,bottom: 14.h),
-                              child: Row(
-                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+              barrierLabel: "Label",
+              barrierDismissible: true,
+              barrierColor: Colors.black.withOpacity(0.5),
+              transitionDuration: const Duration(milliseconds: 100),
+              context: context,
+              pageBuilder: (context, anim1, anim2) {
+                return Material(
+                  type: MaterialType.transparency,
+                  child: StatefulBuilder(
+                    builder: (con, setState) {
+                      return Align(
+                        alignment: Alignment.bottomCenter,
+                        child:
+                            BlocBuilder<CompletedOrderCubit, CompletedOrderState>(
+                          builder: (context, state) {
+                            return Container(
+                              clipBehavior: Clip.antiAlias,
+                              height: state is DateSelectedForCompletedOrderState 
+                                  ? 280.h
+                                  : 250.h,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: const BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20))),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CustomText(text: 'Filter by',fontSize: 17.sp,fontWeight: FontWeight.w600,color: textColor),
-                                  InkWell(
-                                    onTap: goBack(context),
-                                    child:Icon(Icons.close,size: 20.h))
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 18.w,
+                                        right: 18.w,
+                                        top: 20.h,
+                                        bottom: 14.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CustomText(
+                                            text: 'Filter by',
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: textColor),
+                                        InkWell(
+                                            onTap: () =>
+                                                Navigator.of(context).pop(),
+                                            child:
+                                                Icon(Icons.close, size: 20.h))
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(color: textColor.withOpacity(0.2)),
+                                  Expanded(
+                                      child: Container(
+                                          color: whiteColor,
+                                          height: 100.h,
+                                          child: Column(
+                                            children: [
+                                              ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  itemCount: completedOrderScreenCubit
+                                                      .timeList.length,
+                                                  itemBuilder: (ctx, index) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        context
+                                                            .read<
+                                                                CompletedOrderCubit>()
+                                                            .applyFilter(index);
+                                                        if (index ==
+                                                            completedOrderScreenCubit
+                                                                    .timeList
+                                                                    .length -
+                                                                1) {
+                                                          completedOrderScreenCubit
+                                                                  .isCustomDateSelected =
+                                                              true;
+                                                          context
+                                                              .read<
+                                                                  CompletedOrderCubit>()
+                                                              .openDatePicker(
+                                                                  context);
+                                                        } else {
+                                                          completedOrderScreenCubit
+                                                                  .isCustomDateSelected =
+                                                              false;
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                          color: whiteColor,
+                                                          height: 25.h,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 5.w),
+                                                            child: Row(
+                                                              children: [
+                                                                index == 3
+                                                                    ? Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            left:
+                                                                                10.w,
+                                                                            right: 8.w),
+                                                                        child: const Icon(
+                                                                            Icons.calendar_month),
+                                                                      )
+                                                                    : Transform
+                                                                        .scale(
+                                                                        scale:
+                                                                            0.9.h,
+                                                                        child: Padding(
+                                                                            padding: EdgeInsets.only(right: 5.w, left: 5.w),
+                                                                            child: BlocBuilder<CompletedOrderCubit, CompletedOrderState>(
+                                                                              builder: (context, state) {
+                                                                                if (state is FilterAppliedForCompletedOrderState) {
+                                                                                  return Radio(
+                                                                                      value: index,
+                                                                                      visualDensity: const VisualDensity(horizontal: -2, vertical: 0),
+                                                                                      activeColor: secondaryColor,
+                                                                                      hoverColor: Colors.grey,
+                                                                                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                                                      groupValue: completedOrderScreenCubit.selectedTime,
+                                                                                      onChanged: (value) {
+                                                                                        context.read<CompletedOrderCubit>().applyFilter(value!);
+                                                                                        // setState(() {
+                                                                                        //   // assignedOrderScreenController.selectedTime = value!;
+                                                                                        // });
+                                                                                      });
+                                                                                } else {
+                                                                                  return Radio(
+                                                                                      value: index,
+                                                                                      visualDensity: const VisualDensity(horizontal: -2, vertical: 0),
+                                                                                      activeColor: secondaryColor,
+                                                                                      hoverColor: Colors.grey,
+                                                                                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                                                      groupValue: completedOrderScreenCubit.selectedTime,
+                                                                                      onChanged: (value) {
+                                                                                        context.read<CompletedOrderCubit>().applyFilter(value!);
+                                                                                        // setState(() {
+                                                                                        //   // assignedOrderScreenController.selectedTime = value!;
+                                                                                        // });
+                                                                                      });
+                                                                                }
+                                                                              },
+                                                                            )),
+                                                                      ),
+                                                                CustomText(
+                                                                    text: completedOrderScreenCubit
+                                                                            .timeList[
+                                                                        index],
+                                                                    color:
+                                                                        textColor,
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400)
+                                                              ],
+                                                            ),
+                                                          )),
+                                                    );
+                                                  }),
+                                              BlocBuilder<CompletedOrderCubit,
+                                                  CompletedOrderState>(
+                                                builder: (context, state) {
+                                                  if (state
+                                                      is DateSelectedForCompletedOrderState) {
+                                                    return Container(
+                                                      // color: Colors.cyanAccent,
+                                                      margin: EdgeInsets.only(
+                                                          left: 17.w,
+                                                          right: 17.w),
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Expanded(
+                                                              child: SizedBox(
+                                                                  height: 30.h,
+                                                                  child: ListTile(
+                                                                      dense:
+                                                                          true,
+                                                                      horizontalTitleGap:
+                                                                          5.w,
+                                                                      minLeadingWidth:
+                                                                          0,
+                                                                      tileColor:
+                                                                          Colors
+                                                                              .brown,
+                                                                      minVerticalPadding:
+                                                                          0,
+                                                                      enabled:
+                                                                          true,
+                                                                      contentPadding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      leading: Icon(
+                                                                          Icons
+                                                                              .calendar_month,
+                                                                          color:
+                                                                              secondaryColor,
+                                                                          size: 18
+                                                                              .h),
+                                                                      title: CustomTextfield(
+                                                                          isReadyOnly:
+                                                                              true,
+                                                                          controller:
+                                                                              completedOrderScreenCubit.fromDate)))),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 12.w,
+                                                                    right:
+                                                                        12.w),
+                                                            child:
+                                                                const CustomText(
+                                                                    text: 'To'),
+                                                          ),
+                                                          Expanded(
+                                                            child: SizedBox(
+                                                                height: 30.h,
+                                                                child: ListTile(
+                                                                    dense: true,
+                                                                    horizontalTitleGap:
+                                                                        5.w,
+                                                                    minLeadingWidth:
+                                                                        0,
+                                                                    tileColor:
+                                                                        Colors
+                                                                            .brown,
+                                                                    minVerticalPadding:
+                                                                        0,
+                                                                    enabled:
+                                                                        true,
+                                                                    contentPadding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    leading: Icon(
+                                                                        Icons
+                                                                            .calendar_month,
+                                                                        color:
+                                                                            secondaryColor,
+                                                                        size: 18
+                                                                            .h),
+                                                                    title: CustomTextfield(
+                                                                        isReadyOnly:
+                                                                            true,
+                                                                        controller:
+                                                                            completedOrderScreenCubit.toDate))),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return const SizedBox();
+                                                  }
+                                                },
+                                              )
+                                            ],
+                                          ))),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 18.w,
+                                        right: 18.w,
+                                        bottom: 20.h,
+                                        top: 14.h),
+                                    child: CustomAuthButtonWidget(
+                                        buttonName: 'Apply',
+                                        onTap: () =>
+                                            Navigator.of(context).pop()),
+                                  )
                                 ],
                               ),
-                            ),
-                            Divider(color: textColor.withOpacity(0.2)),
-                            Expanded(
-                              child: Container(
-                                color: whiteColor,
-                                  height: 100.h,
-                                  child: Column(
-                                    children: [
-                                      ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap:true,
-                                        physics: const NeverScrollableScrollPhysics(),
-                                        itemCount: 4,    
-                                        itemBuilder:(ctx,index) {
-                                          return InkWell(
-                                              onTap: (){
-                                                // setState((){
-                                                //   completedOrdersScreenController.selectedTime = index;
-                                                // });
-                                                // if(index== completedOrdersScreenController.timeList.length -1){
-                                                //   completedOrdersScreenController.isCustomDateSelected.value = true;
-                                                //   completedOrdersScreenController.openDatePicker(context);
-                                                // }else{
-                                                //   completedOrdersScreenController.isCustomDateSelected.value = false;
-                                                // }
-                                              },
-                                              child: Container(
-                                                color: whiteColor,
-                                                  height:25.h,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(left: 5.w),
-                                                    child: Row(
-                                                      children: [
-                                                        Transform.scale(
-                                                          scale: 0.9.h,
-                                                          child: Padding(
-                                                            padding: EdgeInsets.only(right: 5.w,left: 5.w),
-                                                            child: Radio(value: index,
-                                                            visualDensity: const VisualDensity(
-                                                                horizontal: -2, vertical: 0), 
-                                                            activeColor: secondaryColor,
-                                                            hoverColor: Colors.grey,
-                                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                                            groupValue: 0,
-                                                            onChanged: (value){
-                                                              setState(() {
-                                                                    // completedOrdersScreenController.selectedTime = value!;  
-                                                                });
-                                                            }),
-                                                          ),
-                                                        ),
-                                                        CustomText(text: 'demo',color: textColor,
-                                                        fontSize: 16.sp, fontWeight:  FontWeight.w400)
-                                                      ],
-                                                    ),
-                                                  )),
-                                            );
-                                        }),
-                                      
-                                      Container(
-                                        // color: Colors.cyanAccent,
-                                        margin: EdgeInsets.only(left:17.w,right: 17.w),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Expanded(child: SizedBox(
-                                              height: 30.h,
-                                              child: ListTile(
-                                                dense: true,horizontalTitleGap: 5.w,
-                                                minLeadingWidth: 0,tileColor: Colors.brown,
-                                                minVerticalPadding: 0,
-                                                enabled: true,
-                                                contentPadding: EdgeInsets.zero,
-                                                leading: Icon(Icons.calendar_month,color: secondaryColor,size: 18.h),
-                                                title: const CustomTextfield(isReadyOnly: true,)))),
-                                            Padding(
-                                              padding: EdgeInsets.only(left: 12.w,right: 12.w),
-                                              child: const CustomText(text: 'To'),
-                                            ),
-                                            Expanded(child: SizedBox(
-                                              height: 30.h,
-                                              child: ListTile(
-                                                dense: true,horizontalTitleGap: 5.w,
-                                                minLeadingWidth: 0,tileColor: Colors.brown,
-                                                minVerticalPadding: 0,
-                                                enabled: true,
-                                                contentPadding: EdgeInsets.zero,
-                                                leading: Icon(Icons.calendar_month,color: secondaryColor,size: 18.h),
-                                                title: const CustomTextfield(isReadyOnly: true,))),
-                                            )
-                                          ],
-                                        ),
-                                      ) 
-                                    ],
-                                  )
-                                  )),
-                            Padding(
-                              padding: EdgeInsets.only(left: 18.w,right: 18.w,bottom: 20.h,top: 14.h),
-                              child: CustomAuthButtonWidget(buttonName: 'Apply',onTap: goBack(context)),
-                            )
-                          ],
+                            );
+                          },
                         ),
-                      )
-                    );
-                  },
-                ),
-              );
-            });
+                      );
+                    },
+                  ),
+                );
+              });
         },
         child: CircleAvatar(radius: 19.r,backgroundColor: primaryColor,
         child: Center(
