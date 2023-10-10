@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/assigned_order/assigned_order_cubit.dart';
+import 'package:shreeji_delivery_app_bloc/cubits/completed_order/completed_order_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/delivery_details/delivery_details_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/forgot_password/forgot_password_cubit.dart';
 import 'package:shreeji_delivery_app_bloc/cubits/issue_detail/issue_detail_cubit.dart';
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx)=> OtpVerificationCubit()),
         BlocProvider(create: (ctx)=> ResetPasswordCubit()),
         BlocProvider(create: (ctx)=> DeliveryDetailsCubit()),
-        BlocProvider(create: (ctx)=> IssueDetailCubit())
+        BlocProvider(create: (ctx)=> IssueDetailCubit()),
+        BlocProvider(create: (ctx)=> AssignedOrderCubit()),
+        BlocProvider(create: (ctx)=> CompletedOrderCubit())
       ], 
       child: ScreenUtilInit(
         builder: ((context, child) => MaterialApp(
